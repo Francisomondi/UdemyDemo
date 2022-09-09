@@ -34,11 +34,13 @@ const createCourses = async () => {
 
 const getCourses = async () => {
     const courses = await Course
-        .find({
-            price: {
-                $gte: 11
-            }
-        })
+        /// .find({price: { $gte: 11 }})
+        .find()
+        .and([{
+            author: "Francis Omondi"
+        }, {
+            name: "react tutors"
+        }])
         .sort({
             name: 1
         })
@@ -49,5 +51,5 @@ const getCourses = async () => {
 
     console.log(courses)
 }
-createCourses()
+//createCourses()
 getCourses()
