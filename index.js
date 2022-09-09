@@ -19,7 +19,7 @@ const courseSchema = new mongoose.Schema({
 
 const Course = mongoose.model("Course", courseSchema)
 
-const createCourse = async () => {
+const createCourses = async () => {
     const course = new Course({
         name: "react tutors",
         author: "Francis Omondi",
@@ -30,4 +30,9 @@ const createCourse = async () => {
     console.log(result)
 }
 
-createCourse()
+const getCourses = async () => {
+    const courses = await Course.find()
+    console.log(courses)
+}
+
+getCourses()
