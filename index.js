@@ -7,6 +7,7 @@ mongoose.connect("mongodb://localhost/playground")
 
 const courseSchema = new mongoose.Schema({
     name: String,
+    price: Number,
     author: String,
     tags: [String],
     date: {
@@ -19,15 +20,35 @@ const courseSchema = new mongoose.Schema({
 
 const Course = mongoose.model("Course", courseSchema)
 
-const createCourse = async () => {
+const createCourses = async () => {
     const course = new Course({
-        name: "react tutors",
-        author: "Francis Omondi",
-        tags: ["react", "frontend"],
+        name: "thietheen tutors",
+        price: 13,
+        author: "ramogi Mwanzia",
+        tags: ["thirteen", "frontend"],
         isPublished: true
     })
     const result = await course.save()
     console.log(result)
 }
 
-createCourse()
+const getCourses = async () => {
+    const courses = await Course
+        /// .find({price: { $gte: 11 }})
+        .find({
+            author: "Francis Omondi",
+            isPublished: true
+        })
+        .sort({
+            name: 1
+        })
+        .select({
+            name: 1,
+            tags: 1
+        })
+        .count()
+
+    console.log(courses)
+}
+//createCourses()
+getCourses()
