@@ -8,11 +8,14 @@ console.log("Before");
 //})
 //});
 
-getUser(1)
-  .then((user) => getRepositories(user.gitHubUsername))
-  .then((repos) => getCommits(repos[0]))
-  .then((commits) => console.log("Commits", commits))
-  .catch((err) => console.log(err));
+const displayCommits = async () => {
+  const user = await getUser(1);
+  const repos = await getRepositories(user.gitHubUsername);
+  const commits = await getCommits(repos[0]);
+
+  console.log(commits);
+};
+displayCommits();
 
 console.log("After");
 
