@@ -39,6 +39,7 @@ const getCourses = async () => {
             author: "Francis Omondi",
             isPublished: true
         })
+        .limit(10)
         .sort({
             name: 1
         })
