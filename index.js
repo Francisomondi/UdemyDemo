@@ -33,7 +33,17 @@ const createCourses = async () => {
 }
 
 const getCourses = async () => {
-    const courses = await Course.find()
+    const courses = await Course
+        //.find({
+        //   author: "Unique mweni",
+        // isPublished: true
+        // })
+        .find({
+            price: {
+                $in: [10, 15, 30]
+            }
+        })
     console.log(courses)
+
 }
 getCourses()
