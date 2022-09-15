@@ -7,14 +7,18 @@ console.log("Before");
 //})
 //})
 //});
-
 const displayCommits = async () => {
-  const user = await getUser(1);
-  const repos = await getRepositories(user.gitHubUsername);
-  const commits = await getCommits(repos[0]);
+  try {
+    const user = await getUser(1);
+    const repos = await getRepositories(user.gitHubUsername);
+    const commits = await getCommits(repos[0]);
 
-  console.log(commits);
+    console.log(commits);
+  } catch (error) {
+    console.log(error);
+  }
 };
+
 displayCommits();
 
 console.log("After");

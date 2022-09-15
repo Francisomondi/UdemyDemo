@@ -12,10 +12,6 @@ getUser(1, (user) => {
 
 })
 
-
-
-
-
 console.log("after")
 
 function getUser(id, callback) {
