@@ -33,16 +33,27 @@ const createCourses = async () => {
 }
 
 const getCourses = async () => {
+
+    //logical operators
+    //or
+    //and
     const courses = await Course
-        //.find({
-        //   author: "Unique mweni",
-        // isPublished: true
-        // })
-        .find({
-            price: {
-                $in: [10, 15, 30]
-            }
+        //.find({ author: "Unique mweni", isPublished: true })
+        .find()
+        .or([{
+            author: "Unique mweni"
+        }, {
+            isPublished: true
+        }])
+        .limit(10)
+        .sort({
+            name: 1
         })
+        .select({
+            name: 1,
+            tags: 1
+        })
+
     console.log(courses)
 
 }
