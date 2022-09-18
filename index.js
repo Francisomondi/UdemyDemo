@@ -82,4 +82,16 @@ const updateCourse = async (id) => {
     const result = await course.save()
     console.log(result)
 }
-updateCourse("631b860a07c7cd0bba56a489")
+
+
+//remove a document
+const removeCourse = async (id) => {
+    const result = await Course.deleteOne({
+        _id: id
+    })
+
+    console.log(result)
+}
+
+
+removeCourse("631b860a07c7cd0bba56a489")
