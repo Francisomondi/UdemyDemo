@@ -17,7 +17,13 @@ const courseSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    isPublished: Boolean
+    isPublished: Boolean,
+    price: {
+        type: number,
+        required: function () {
+            return this.isPublished
+        }
+    }
 
 })
 
