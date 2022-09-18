@@ -8,18 +8,29 @@ mongoose.connect("mongodb://localhost/playground")
 const courseSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        minlength: 5,
+        maxlength: 20
+
     },
     price: Number,
     author: String,
-    tags: [String],
+    tags: {
+        type: Array,
+        validate: {
+            validator: function (value) {
+                return value.length > 0
+            },
+            message: "this course should have atleast one tag"
+        }
+    },
     date: {
         type: Date,
         default: Date.now
     },
     isPublished: Boolean,
     price: {
-        type: number,
+        type: Number,
         required: function () {
             return this.isPublished
         }
@@ -31,11 +42,12 @@ const Course = mongoose.model("Course", courseSchema)
 
 const createCourse = async () => {
     const course = new Course({
-        //name: "thietheen tutors",
+        name: "thietheen tutors",
         price: 13,
         author: "ramogi Mwanzia",
-        tags: ["thirteen", "frontend"],
-        isPublished: true
+        tags: ["the tag"],
+        isPublished: true,
+
     })
     try {
         const result = await course.save()
@@ -108,4 +120,4 @@ const removeCourse = async (id) => {
 }
 
 
-createCourse("631b860a07c7cd0bba56a489")
+removeCourse("631bc3a5aed7f61ed3af4231")
