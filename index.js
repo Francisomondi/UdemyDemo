@@ -46,7 +46,8 @@ const createCourse = async () => {
         price: 13,
         author: "ramogi Mwanzia",
         tags: ["the tag"],
-        isPublished: true
+        isPublished: true,
+
     })
     try {
         const result = await course.save()
@@ -119,4 +120,4 @@ const removeCourse = async (id) => {
 }
 
 
-createCourse("631b860a07c7cd0bba56a489")
+removeCourse("631bc3a5aed7f61ed3af4231")
