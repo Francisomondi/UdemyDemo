@@ -6,7 +6,10 @@ mongoose.connect("mongodb://localhost/playground")
     .catch(err => console.error("cound not connect to the db" + err))
 
 const courseSchema = new mongoose.Schema({
-    name: String,
+    name: {
+        type: String,
+        required: true
+    },
     price: Number,
     author: String,
     tags: [String],
@@ -20,16 +23,21 @@ const courseSchema = new mongoose.Schema({
 
 const Course = mongoose.model("Course", courseSchema)
 
-const createCourses = async () => {
+const createCourse = async () => {
     const course = new Course({
-        name: "thietheen tutors",
+        //name: "thietheen tutors",
         price: 13,
         author: "ramogi Mwanzia",
         tags: ["thirteen", "frontend"],
         isPublished: true
     })
-    const result = await course.save()
-    console.log(result)
+    try {
+        const result = await course.save()
+        console.log(result)
+    } catch (error) {
+        console.log(error.message)
+    }
+
 }
 
 const getCourses = async () => {
@@ -94,4 +102,4 @@ const removeCourse = async (id) => {
 }
 
 
-removeCourse("631b860a07c7cd0bba56a489")
+createCourse("631b860a07c7cd0bba56a489")
