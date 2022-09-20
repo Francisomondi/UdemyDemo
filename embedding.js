@@ -14,16 +14,13 @@ const Author = mongoose.model('Author', authorSchema);
 
 const Course = mongoose.model('Course', new mongoose.Schema({
   name: String,
-  author: {
-    type: authorSchema,
-    required: true
-  }
+  authors: [authorSchema]
 }));
 
-async function createCourse(name, author) {
+async function createCourse(name, authors) {
   const course = new Course({
     name,
-    author
+    authors
   });
 
   const result = await course.save();
@@ -45,8 +42,14 @@ async function updateAuthor(courseId) {
   })
 }
 
-//createCourse('Node Course', new Author({
-//name: 'Francis'
-//}));
+async function addAuthor(courseId, author) {
+  const course = await Course.findById(courseId)
+  course.authors.push(author)
+  course.save()
+}
 
-updateAuthor('6329c44636099704a0760baa')
+addAuthor("6329e308a0ff92c22dd9888c", new Author({
+  name: "camih camilah"
+}))
+
+//updateAuthor('6329c44636099704a0760baa')
