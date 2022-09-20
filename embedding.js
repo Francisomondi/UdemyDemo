@@ -36,8 +36,8 @@ async function updateAuthor(courseId) {
   const course = await Course.updateOne({
     _id: courseId
   }, {
-    $set: {
-      'author.name': "Omondi francis"
+    $unset: {
+      'author': ""
     }
   })
 }
